@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import { Grid, Container } from "@mui/material";
+
+import { styles } from "./styles";
+import ThemeCustomization from "./theme";
+import { PlayerProvider } from "./contexts";
+import { UserAvatar, PlayerScore, HighScore, AppBackground } from "./component";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeCustomization>
+      <PlayerProvider>
+        <AppBackground />
+        <Container sx={styles.rootContainer}>
+          <Grid sx={styles.headerGrid}>
+            <Grid item>
+              <HighScore />
+            </Grid>
+            <Grid item>
+              <UserAvatar />
+            </Grid>
+          </Grid>
+          <Grid sx={styles.playerGrid}>
+            <PlayerScore />
+          </Grid>
+        </Container>
+      </PlayerProvider>
+    </ThemeCustomization>
   );
-}
+};
 
 export default App;
